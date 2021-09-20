@@ -1,4 +1,4 @@
-import React, { useReducer, createContext, ReactNode, useContext } from "react";
+import { useReducer, createContext, ReactNode, useContext } from "react";
 import { secretKey } from "../keys.config";
 import { Keypair } from "@solana/web3.js";
 
@@ -8,21 +8,29 @@ const address = key.publicKey.toString();
 const initialState: IState = {
   pubKey: address,
   balance: 0,
-  error: "",
-  success: false,
+  severity: "",
+  isFetching: null,
+  txSignature: undefined,
+  message: "",
 };
 
 interface IState {
   pubKey: string;
   balance: number;
-  error: string;
-  success: boolean;
+  severity: string;
+  isFetching: null | boolean;
+  txSignature: string | undefined;
+  message: string;
 }
 
 export type WalletAction =
-  | { type: "getAdress" | "success" | "error" | "fund" }
+  | { type: "getAdress" }
   | { type: "getBalance"; payload: number }
-  | { type: "transfer"; payload: number };
+  | { type: "transfer"; payload: number }
+  | { type: "setTxSignature"; payload: string | undefined }
+  | { type: "isFetching"; payload: boolean }
+  | { type: "severity"; payload: { severity: string; message: string } }
+  | { type: "fund"; payload: { type: string; message: string } };
 
 export type Dispatch = (action: WalletAction) => void;
 
@@ -48,17 +56,29 @@ const walletReducer = (state: IState, action: WalletAction) => {
     case "fund":
       return {
         ...state,
-        success: !state.success,
+        severity: action.payload.type,
+        message: action.payload.message,
       };
-    case "error":
+    case "severity":
       return {
         ...state,
-        error: "Error funding!!",
+        severity: action.payload.severity,
+        message: action.payload.message,
       };
     case "transfer":
       return {
         ...state,
         balance: state.balance - action.payload,
+      };
+    case "isFetching":
+      return {
+        ...state,
+        isFetching: action.payload,
+      };
+    case "setTxSignature":
+      return {
+        ...state,
+        txSignature: action.payload,
       };
     default:
       return state;

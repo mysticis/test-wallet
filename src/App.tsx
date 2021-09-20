@@ -1,53 +1,56 @@
-import { createTheme, ThemeProvider } from "@material-ui/core/styles";
-import { green } from "@material-ui/core/colors";
 import { Paper } from "@material-ui/core";
 import NavBar from "./components/AppBar";
 import Container from "@material-ui/core/Container";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Typography from "@material-ui/core/Typography";
-//import SimpleCard from "./components/Balance";
+import Loading from "./components/Loading";
 import Connect from "./components/Connect";
-import MyKeypair from "./components/Keypair";
-import Balance from "./components/Balance";
-import Form from "./components/Form";
-import { WalletProvider } from "./store/reducer";
+import { useWalletContext } from "./store/reducer";
+import Accordion from "./components/Accordion";
+import { useSnackbar } from "notistack";
 //import LayoutTextFields from "./components/FormControl";
+import { theme } from "./themes";
+
 function App() {
-  const theme = createTheme({
-    palette: {
-      primary: {
-        main: green[500],
-        light: green[200],
-      },
-      type: "dark",
-    },
-    typography: {
-      fontFamily: "Quicksand",
-      fontWeightLight: 300,
-      fontWeightRegular: 400,
-      fontWeightMedium: 500,
-      fontWeightBold: 600,
-    },
-  });
+  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
+  const { state, dispatch } = useWalletContext();
+  console.log(state.pubKey);
+  const explorerUrl = `https://explorer.solana.com/tx/${state.txSignature}?cluster=devnet`;
   return (
-    <WalletProvider>
-      <ThemeProvider theme={theme}>
-        <Paper style={{ height: "100vh" }}>
-          <NavBar />
-          <Connect />
-          <CssBaseline />
-          <Container maxWidth="sm">
-            <Typography
-              component="div"
-              /** style={{ backgroundColor: "#cfe8fc", height: "100vh" }}*/
-            />
-            <MyKeypair />
-            <Balance />
-            <Form />
-          </Container>
-        </Paper>
-      </ThemeProvider>
-    </WalletProvider>
+    <Paper style={{ height: "100vh" }}>
+      <NavBar />
+      <Connect />
+      <CssBaseline />
+      <Container maxWidth="sm">
+        <Accordion />
+        {state.isFetching && <Loading />}
+        {state.isFetching &&
+          enqueueSnackbar(`Sending Tokens...`, {
+            variant: "success",
+            autoHideDuration: 2500,
+          })}
+        <div style={{ marginTop: 20 }}>
+          {state.txSignature
+            ? enqueueSnackbar(`Transaction Successful`, {
+                variant: "success",
+                autoHideDuration: 2500,
+              })
+            : ""}
+          <Typography variant="subtitle1" color="primary">
+            {state.txSignature && (
+              <a
+                href={explorerUrl}
+                target="_blank"
+                rel="noreferrer"
+                color={theme.palette.primary.main}
+              >
+                View on Solana Explorer
+              </a>
+            )}
+          </Typography>
+        </div>
+      </Container>
+    </Paper>
   );
 }
 

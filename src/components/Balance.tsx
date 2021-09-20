@@ -8,6 +8,7 @@ import Button from "@material-ui/core/Button";
 import { Connection, LAMPORTS_PER_SOL, PublicKey } from "@solana/web3.js";
 import { useWalletContext } from "../store/reducer";
 import { getNodeRpcURL, getAccountExplorerURL } from "../lib/utils";
+import PubKey from "./PubKey";
 
 //import { useGlobalState } from "../context/GlobalState";
 
@@ -52,23 +53,28 @@ export default function Balance() {
       })
       .catch((err) => {
         console.log(err);
-        dispatch({ type: "error" });
       });
   };
   return (
-    <Card className={classes.root} style={{ marginTop: 20, marginBottom: 20 }}>
-      <CardContent>
-        <Typography
-          className={classes.title}
-          color="textSecondary"
-          gutterBottom
-        >
-          Balance
-        </Typography>
-        <Typography variant="h3" component="h2">
-          {state.balance} SOL
-        </Typography>
-      </CardContent>
-    </Card>
+    <div>
+      <Card
+        className={classes.root}
+        style={{ marginTop: 20, marginBottom: 20 }}
+      >
+        <CardContent>
+          <PubKey />
+          <Typography
+            className={classes.title}
+            color="textSecondary"
+            gutterBottom
+          >
+            Balance
+          </Typography>
+          <Typography variant="h3" component="h2">
+            {state.balance} SOL
+          </Typography>
+        </CardContent>
+      </Card>
+    </div>
   );
 }
