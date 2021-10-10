@@ -2,16 +2,45 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import { createTheme, ThemeProvider } from "@material-ui/core/styles";
-import { SnackbarProvider, useSnackbar } from "notistack";
 import { WalletProvider } from "./store/reducer";
-import { theme } from "./themes";
+import { ThemeProvider, useTheme, createTheme } from "@mui/material/styles";
+import { green, grey } from "@mui/material/colors";
+import { PaletteMode } from "@mui/material";
+
+export const getDesignTokens = (mode: PaletteMode) => ({
+  palette: {
+    mode,
+    primary: {
+      ...green,
+      ...(mode === "dark" && {
+        main: green[300],
+      }),
+    },
+    ...(mode === "dark" && {
+      background: {
+        default: grey[900],
+        paper: grey[900],
+      },
+    }),
+    text: {
+      ...(mode === "light"
+        ? {
+            primary: green[900],
+            secondary: green[800],
+          }
+        : {
+            primary: "#fff",
+            secondary: grey.A700,
+          }),
+    },
+  },
+});
+
+const darkModeTheme = createTheme(getDesignTokens("dark"));
 ReactDOM.render(
   <WalletProvider>
-    <ThemeProvider theme={theme}>
-      <SnackbarProvider maxSnack={3}>
-        <App />
-      </SnackbarProvider>
+    <ThemeProvider theme={darkModeTheme}>
+      <App />
     </ThemeProvider>
   </WalletProvider>,
   document.getElementById("root")

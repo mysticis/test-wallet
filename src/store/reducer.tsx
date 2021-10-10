@@ -1,7 +1,8 @@
 import { useReducer, createContext, ReactNode, useContext } from "react";
 import { secretKey } from "../keys.config";
 import { Keypair } from "@solana/web3.js";
-
+import { toast } from "react-toastify";
+import { Toast } from "react-toastify/dist/types";
 const key = Keypair.fromSecretKey(secretKey);
 const address = key.publicKey.toString();
 

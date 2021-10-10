@@ -1,11 +1,14 @@
 import React from "react";
-import Button from "@material-ui/core/Button";
-import TextField from "@material-ui/core/TextField";
-import Dialog from "@material-ui/core/Dialog";
-import DialogActions from "@material-ui/core/DialogActions";
-import DialogContent from "@material-ui/core/DialogContent";
-import DialogContentText from "@material-ui/core/DialogContentText";
-import DialogTitle from "@material-ui/core/DialogTitle";
+import SendIcon from "@mui/icons-material/Send";
+import Button from "@mui/material/Button";
+import TextField from "@mui/material/TextField";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import {
   Connection,
   PublicKey,
@@ -17,13 +20,13 @@ import {
 import { useWalletContext } from "../store/reducer";
 import { getNodeRpcURL, getTxExplorerURL, getNodeWsURL } from "../lib/utils";
 import { secretKey } from "../keys.config";
-import { useSnackbar } from "notistack";
+import Typography from "@mui/material/Typography";
+import { teal, green } from "@mui/material/colors";
 
 function FormDialog() {
   const [open, setOpen] = React.useState(false);
   const [address, setAddress] = React.useState("");
   const [amount, setAmount] = React.useState("");
-  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
   const { state, dispatch } = useWalletContext();
 
   //transfer function
@@ -31,9 +34,9 @@ function FormDialog() {
     const amountNumber = parseFloat(amount);
 
     if (isNaN(amountNumber)) {
-      enqueueSnackbar(`Couldn\'t parse anount! :(, please check!`, {
-        variant: "error",
-        autoHideDuration: 2500,
+      toast.error("Amount entered is not a number", {
+        position: "top-center",
+        autoClose: 9000,
       });
       return;
     }
@@ -71,11 +74,21 @@ function FormDialog() {
       .then((signature) => {
         dispatch({ type: "setTxSignature", payload: signature });
         dispatch({ type: "isFetching", payload: false });
+        toast.success("Transaction was successful!", {
+          position: "top-right",
+          autoClose: 7000,
+        });
+        setAddress("");
+        setAmount("");
         console.log(signature);
       })
       .catch((error) => {
         console.log(error);
         dispatch({ type: "isFetching", payload: false });
+        toast.error("Transaction failed!", {
+          position: "top-right",
+          autoClose: 6000,
+        });
       });
     console.log(address, amount);
 
@@ -110,21 +123,38 @@ function FormDialog() {
   return (
     <div>
       {state.isFetching === null ? (
-        <Button variant="outlined" color="primary" onClick={handleClickOpen}>
-          Send
+        <Button
+          variant="outlined"
+          onClick={handleClickOpen}
+          startIcon={<SendIcon />}
+        >
+          <Typography fontFamily={"Quicksand"} color={green.A700}>
+            {" "}
+            Send{" "}
+          </Typography>
         </Button>
       ) : state.isFetching === true ? (
         <Button
           variant="outlined"
-          color="primary"
           onClick={handleClickOpen}
           disabled
+          startIcon={<SendIcon />}
         >
-          Send
+          <Typography fontFamily={"Quicksand"} color={green.A700}>
+            {" "}
+            Send{" "}
+          </Typography>
         </Button>
       ) : (
-        <Button variant="outlined" color="primary" onClick={handleClickOpen}>
-          Send
+        <Button
+          variant="outlined"
+          onClick={handleClickOpen}
+          startIcon={<SendIcon />}
+        >
+          <Typography fontFamily={"Quicksand"} color={green.A700}>
+            {" "}
+            Send{" "}
+          </Typography>
         </Button>
       )}
       <Dialog
@@ -133,10 +163,13 @@ function FormDialog() {
         aria-labelledby="form-dialog-title"
       >
         <DialogTitle id="form-dialog-title">
-          Paste Destination Address
+          <Typography fontFamily={"Quicksand"}>
+            {" "}
+            Paste Destination address{" "}
+          </Typography>
         </DialogTitle>
         <DialogContent>
-          <DialogContentText>
+          <DialogContentText fontFamily={"Quicksand"}>
             Verify that the address is correct as funds sent to the wrong
             address might not be recovered.
           </DialogContentText>
@@ -145,7 +178,7 @@ function FormDialog() {
             id="outlined-full-width"
             label="Sol Devnet Address"
             required
-            style={{ margin: 8 }}
+            style={{ margin: 8, fontFamily: "Quicksand" }}
             placeholder="Sol Devnet Address"
             helperText="Address!"
             value={address}
@@ -160,7 +193,7 @@ function FormDialog() {
           <TextField
             id="outlined-full-width"
             label="Amount"
-            style={{ margin: 8 }}
+            style={{ margin: 8, fontFamily: "Quicksand" }}
             required
             placeholder="1000000000 lamport = 1 SOL"
             helperText="Amount!"
@@ -175,10 +208,19 @@ function FormDialog() {
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose} color="primary">
+          <Button
+            onClick={handleClose}
+            variant="outlined"
+            style={{ fontFamily: "Quicksand", color: green.A700 }}
+          >
             Cancel
           </Button>
-          <Button onClick={transfer} color="primary">
+          <Button
+            onClick={transfer}
+            startIcon={<SendIcon />}
+            variant="outlined"
+            style={{ fontFamily: "Quicksand", color: green.A700 }}
+          >
             Send
           </Button>
         </DialogActions>

@@ -265,5 +265,19 @@ const fund = () => {
       });
   };
 
+
+ {version
+        ? enqueueSnackbar(`Connected to Solana Devnet version ${version}`, {
+            variant: "success",
+            autoHideDuration: 5000,
+          })
+        : enqueueSnackbar(`Not Connected`, {
+            variant: "error",
+            autoHideDuration: 2500,
+          })}
   ***********************************************
+   <Avatar
+              alt="Solana Icon"
+              src="https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/solana/info/logo.png"
+            />
   	https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/solana/info/logo.png
