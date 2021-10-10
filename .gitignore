@@ -18,7 +18,6 @@ test.txt
 .env.development.local
 .env.test.local
 .env.production.local
-keys.config.ts
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
