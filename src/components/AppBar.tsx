@@ -48,7 +48,7 @@ export default function NavBar() {
             sx={{ flexGrow: 1 }}
             fontFamily={"Quicksand"}
           >
-            Test Wallet
+            Test Wallet*
           </Typography>
           <Typography fontFamily={"Quicksand"} fontSize={"20"}>
             Devnet Version {version}
