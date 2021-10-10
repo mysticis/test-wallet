@@ -56,6 +56,5 @@
   "devDependencies": {
     "@types/qrcode.react": "^1.0.2",
     "@types/react": "^17.0.20"
-  },
-  "proxy": "https://api.coingecko.com/api/v3/coins/solana"
+  }
 }
