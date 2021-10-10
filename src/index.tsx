@@ -3,7 +3,7 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { WalletProvider } from "./store/reducer";
-import { ThemeProvider, useTheme, createTheme } from "@mui/material/styles";
+import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { green, grey } from "@mui/material/colors";
 import { PaletteMode } from "@mui/material";
 

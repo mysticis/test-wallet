@@ -18,10 +18,10 @@ import {
   sendAndConfirmTransaction,
 } from "@solana/web3.js";
 import { useWalletContext } from "../store/reducer";
-import { getNodeRpcURL, getTxExplorerURL, getNodeWsURL } from "../lib/utils";
+import { getNodeRpcURL, getNodeWsURL } from "../lib/utils";
 import { secretKey } from "../keys.config";
 import Typography from "@mui/material/Typography";
-import { teal, green } from "@mui/material/colors";
+import { green } from "@mui/material/colors";
 
 function FormDialog() {
   const [open, setOpen] = React.useState(false);

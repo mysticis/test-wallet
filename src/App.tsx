@@ -5,7 +5,7 @@ import CssBaseline from "@mui/material/CssBaseline";
 import Typography from "@mui/material/Typography";
 import Loading from "./components/Loading";
 import { useWalletContext } from "./store/reducer";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import ControlledAccordions from "./components/ControlledAccordion";
 import { injectStyle } from "react-toastify/dist/inject-style";
 
@@ -14,7 +14,7 @@ if (typeof window !== "undefined") {
 }
 
 function App() {
-  const { state, dispatch } = useWalletContext();
+  const { state } = useWalletContext();
   //console.log(state.pubKey);
   const explorerUrl = `https://explorer.solana.com/tx/${state.txSignature}?cluster=devnet`;
   return (

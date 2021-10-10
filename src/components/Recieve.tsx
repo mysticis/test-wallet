@@ -12,7 +12,7 @@ import IconButton from "@material-ui/core/IconButton";
 import CopyIcon from "mdi-material-ui/ContentCopy";
 import QrcodeIcon from "mdi-material-ui/Qrcode";
 import { toast } from "react-toastify";
-import { teal, green } from "@mui/material/colors";
+import { green } from "@mui/material/colors";
 import QRCode from "qrcode.react";
 import "react-toastify/dist/ReactToastify.css";
 import BusinessCenterIcon from "@mui/icons-material/BusinessCenter";
@@ -30,8 +30,7 @@ const useStyles = makeStyles((theme) => ({
 //Recieve component
 export default function Recieve() {
   const [open, setOpen] = React.useState(false);
-  const [isCopied, setIsCopied] = React.useState(false);
-  const { state, dispatch } = useWalletContext();
+  const { state } = useWalletContext();
   const classes = useStyles();
   const handleClickOpen = () => {
     setOpen(true);
@@ -50,7 +49,7 @@ export default function Recieve() {
       position: "bottom-left",
       autoClose: 5000,
     });
-    setIsCopied(true);
+
     setOpen(false);
   };
   return (

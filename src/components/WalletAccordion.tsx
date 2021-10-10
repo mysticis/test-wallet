@@ -33,9 +33,7 @@ export default function DetailedAccordion() {
 
   //get balance
   useEffect(() => {
-    getBalance();
-  }, []);
-  const getBalance = () => {
+    //getBalance();
     const url = getNodeRpcURL();
     const connection = new Connection(url as string);
 
@@ -57,7 +55,30 @@ export default function DetailedAccordion() {
         });
         console.log(err);
       });
-  };
+  }, [dispatch, state.pubKey]);
+  // const getBalance = () => {
+  //   const url = getNodeRpcURL();
+  //   const connection = new Connection(url as string);
+
+  //   const publicKey = new PublicKey(state.pubKey);
+  //   connection
+  //     .getBalance(publicKey)
+  //     .then((balance) => {
+  //       dispatch({ type: "getBalance", payload: balance / DECIMAL_OFFSET });
+  //       toast.success("Successfully Connected!", {
+  //         position: "bottom-center",
+  //         autoClose: 7000,
+  //         pauseOnHover: true,
+  //       });
+  //     })
+  //     .catch((err) => {
+  //       toast.error("Not Connected!", {
+  //         position: "top-right",
+  //         autoClose: 6000,
+  //       });
+  //       console.log(err);
+  //     });
+  // };
   return (
     <div>
       <Accordion
