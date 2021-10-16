@@ -1,4 +1,3 @@
-import { Paper } from "@material-ui/core";
 import NavBar from "./components/AppBar";
 import Container from "@mui/material/Container";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -8,7 +7,7 @@ import { useWalletContext } from "./store/reducer";
 import { ToastContainer } from "react-toastify";
 import ControlledAccordions from "./components/ControlledAccordion";
 import { injectStyle } from "react-toastify/dist/inject-style";
-
+import Paper from "@mui/material/Paper";
 if (typeof window !== "undefined") {
   injectStyle();
 }
@@ -18,7 +17,7 @@ function App() {
   //console.log(state.pubKey);
   const explorerUrl = `https://explorer.solana.com/tx/${state.txSignature}?cluster=devnet`;
   return (
-    <Paper style={{ height: "100vh", overflow: "hidden" }}>
+    <Paper style={{ height: "100vh" }}>
       <NavBar />
 
       <CssBaseline />

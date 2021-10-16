@@ -6,27 +6,27 @@ import { WalletProvider } from "./store/reducer";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { green, grey } from "@mui/material/colors";
 import { PaletteMode } from "@mui/material";
-
+import { QueryClient, QueryClientProvider } from "react-query";
 export const getDesignTokens = (mode: PaletteMode) => ({
   palette: {
     mode,
     primary: {
       ...green,
       ...(mode === "dark" && {
-        main: green[300],
+        main: grey[50],
       }),
     },
     ...(mode === "dark" && {
       background: {
-        default: grey[900],
-        paper: grey[900],
+        default: green[700],
+        paper: grey[50],
       },
     }),
     text: {
-      ...(mode === "light"
+      ...(mode === "dark"
         ? {
-            primary: green[900],
-            secondary: green[800],
+            primary: "#fff",
+            secondary: grey[400],
           }
         : {
             primary: "#fff",
@@ -37,12 +37,16 @@ export const getDesignTokens = (mode: PaletteMode) => ({
 });
 
 const darkModeTheme = createTheme(getDesignTokens("dark"));
+const client = new QueryClient();
+
 ReactDOM.render(
-  <WalletProvider>
-    <ThemeProvider theme={darkModeTheme}>
-      <App />
-    </ThemeProvider>
-  </WalletProvider>,
+  <QueryClientProvider client={client}>
+    <WalletProvider>
+      <ThemeProvider theme={darkModeTheme}>
+        <App />
+      </ThemeProvider>
+    </WalletProvider>
+  </QueryClientProvider>,
   document.getElementById("root")
 );
 

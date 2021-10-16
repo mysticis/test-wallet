@@ -6,7 +6,7 @@ import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
 import { useState, useEffect } from "react";
 import { Connection } from "@solana/web3.js";
-import { green } from "@mui/material/colors";
+import { grey } from "@mui/material/colors";
 
 export default function NavBar() {
   const [version, setVersion] = useState<string | undefined | number>(
@@ -28,7 +28,7 @@ export default function NavBar() {
   };
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static" style={{ background: green[300] }}>
+      <AppBar position="static" style={{ background: grey[300] }}>
         <Toolbar>
           <IconButton
             size="large"
@@ -43,10 +43,11 @@ export default function NavBar() {
             />
           </IconButton>
           <Typography
-            variant="h6"
+            variant="h4"
             component="div"
             sx={{ flexGrow: 1 }}
             fontFamily={"Quicksand"}
+            fontWeight={500}
           >
             Test Wallet*
           </Typography>

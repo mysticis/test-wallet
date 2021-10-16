@@ -127,11 +127,9 @@ function FormDialog() {
           variant="outlined"
           onClick={handleClickOpen}
           startIcon={<SendIcon />}
+          style={{ fontFamily: "Quicksand", color: green.A700 }}
         >
-          <Typography fontFamily={"Quicksand"} color={green.A700}>
-            {" "}
-            Send{" "}
-          </Typography>
+          Send{" "}
         </Button>
       ) : state.isFetching === true ? (
         <Button
@@ -139,22 +137,18 @@ function FormDialog() {
           onClick={handleClickOpen}
           disabled
           startIcon={<SendIcon />}
+          style={{ fontFamily: "Quicksand", color: green.A700 }}
         >
-          <Typography fontFamily={"Quicksand"} color={green.A700}>
-            {" "}
-            Send{" "}
-          </Typography>
+          Send
         </Button>
       ) : (
         <Button
           variant="outlined"
           onClick={handleClickOpen}
           startIcon={<SendIcon />}
+          style={{ fontFamily: "Quicksand", color: green.A700 }}
         >
-          <Typography fontFamily={"Quicksand"} color={green.A700}>
-            {" "}
-            Send{" "}
-          </Typography>
+          Send
         </Button>
       )}
       <Dialog

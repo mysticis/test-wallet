@@ -16,7 +16,7 @@ import { green } from "@mui/material/colors";
 import QRCode from "qrcode.react";
 import "react-toastify/dist/ReactToastify.css";
 import BusinessCenterIcon from "@mui/icons-material/BusinessCenter";
-import Typography from "@mui/material/Typography";
+
 //styles
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -58,10 +58,9 @@ export default function Recieve() {
         variant="outlined"
         onClick={handleClickOpen}
         startIcon={<BusinessCenterIcon />}
+        style={{ fontFamily: "Quicksand", color: green.A700 }}
       >
-        <Typography fontFamily={"Quicksand"} color={green.A700}>
-          Recieve{" "}
-        </Typography>
+        Recieve
       </Button>
       <Dialog
         open={open}
