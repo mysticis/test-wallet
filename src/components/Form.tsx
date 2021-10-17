@@ -9,6 +9,7 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { green } from "@mui/material/colors";
 import {
   Connection,
   PublicKey,
@@ -21,26 +22,39 @@ import { useWalletContext } from "../store/reducer";
 import { getNodeRpcURL, getNodeWsURL } from "../lib/utils";
 import { secretKey } from "../keys.config";
 import Typography from "@mui/material/Typography";
-import { green } from "@mui/material/colors";
+import * as bs58 from "bs58";
 
 function FormDialog() {
   const [open, setOpen] = React.useState(false);
   const [address, setAddress] = React.useState("");
   const [amount, setAmount] = React.useState("");
+  const [addressError, setAddressError] = React.useState(false);
+  const [amountError, setAmountError] = React.useState(false);
   const { state, dispatch } = useWalletContext();
 
   //transfer function
   const transfer = () => {
     const amountNumber = parseFloat(amount);
-
+    const decoded = bs58.decode(address);
     if (isNaN(amountNumber)) {
+      setAmountError(true);
       toast.error("Amount entered is not a number", {
         position: "top-center",
         autoClose: 9000,
       });
       return;
     }
+    if (typeof address === "string" && decoded.length !== 32) {
+      setAddressError(true);
+      toast.error("Invalid public key input!", {
+        position: "top-center",
+        autoClose: 9000,
+      });
 
+      return;
+    }
+    setAmountError(false);
+    setAddressError(false);
     const url = getNodeRpcURL();
     const connection = new Connection(url as string, {
       wsEndpoint: getNodeWsURL(),
@@ -157,17 +171,22 @@ function FormDialog() {
         aria-labelledby="form-dialog-title"
       >
         <DialogTitle id="form-dialog-title">
-          <Typography fontFamily={"Quicksand"}>
+          <Typography
+            style={{ fontFamily: "Quicksand", color: `${green.A700}` }}
+          >
             {" "}
             Paste Destination address{" "}
           </Typography>
         </DialogTitle>
         <DialogContent>
-          <DialogContentText fontFamily={"Quicksand"}>
+          <DialogContentText
+            style={{ fontFamily: "Quicksand", color: `${green.A400}` }}
+          >
             Verify that the address is correct as funds sent to the wrong
             address might not be recovered.
           </DialogContentText>
           <TextField
+            color={addressError ? "error" : "success"}
             autoFocus
             id="outlined-full-width"
             label="Sol Devnet Address"
@@ -186,6 +205,7 @@ function FormDialog() {
           />
           <TextField
             id="outlined-full-width"
+            color={amountError ? "error" : "success"}
             label="Amount"
             style={{ margin: 8, fontFamily: "Quicksand" }}
             required

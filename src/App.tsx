@@ -7,6 +7,7 @@ import { useWalletContext } from "./store/reducer";
 import { ToastContainer } from "react-toastify";
 import ControlledAccordions from "./components/ControlledAccordion";
 import { injectStyle } from "react-toastify/dist/inject-style";
+import { green } from "@mui/material/colors";
 import Paper from "@mui/material/Paper";
 if (typeof window !== "undefined") {
   injectStyle();
@@ -26,9 +27,14 @@ function App() {
 
         {state.isFetching && <Loading />}
         <div style={{ marginTop: 20 }}>
-          <Typography variant="subtitle1" color="text.primary">
+          <Typography variant="subtitle1">
             {state.txSignature && (
-              <a href={explorerUrl} target="_blank" rel="noreferrer">
+              <a
+                href={explorerUrl}
+                target="_blank"
+                rel="noreferrer"
+                style={{ color: `${green.A400}` }}
+              >
                 View on Solana Explorer
               </a>
             )}

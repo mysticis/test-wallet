@@ -5,6 +5,7 @@ import { Box } from "@mui/system";
 import Typography from "@mui/material/Typography";
 import { useQuery } from "react-query";
 import { toast } from "react-toastify";
+import { green } from "@mui/material/colors";
 export interface CoinData {
   market_cap_rank: number;
   market_data: MarketData;
@@ -91,9 +92,15 @@ export default function CoinDataFunc() {
           ${data?.market_data.current_price.usd}
         </Box>
         <TrendingUpIcon
-          sx={{ color: "green", fontSize: 16, verticalAlign: "sub" }}
+          sx={{
+            color: `${green.A400}`,
+            fontSize: 16,
+            verticalAlign: "sub",
+          }}
         />
-        <Typography style={{ color: "green", fontSize: 16, marginTop: 3 }}>
+        <Typography
+          style={{ color: `${green.A400}`, fontSize: 16, marginTop: 3 }}
+        >
           {percentage?.toFixed(1)}%
         </Typography>
       </Stack>

@@ -4,35 +4,36 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { WalletProvider } from "./store/reducer";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
-import { green, grey } from "@mui/material/colors";
+import { grey, amber } from "@mui/material/colors";
 import { PaletteMode } from "@mui/material";
 import { QueryClient, QueryClientProvider } from "react-query";
-export const getDesignTokens = (mode: PaletteMode) => ({
+
+const getDesignTokens = (mode: PaletteMode) => ({
   palette: {
     mode,
-    primary: {
-      ...green,
-      ...(mode === "dark" && {
-        main: grey[50],
-      }),
-    },
-    ...(mode === "dark" && {
-      background: {
-        default: green[700],
-        paper: grey[50],
-      },
-    }),
-    text: {
-      ...(mode === "dark"
-        ? {
+    ...(mode === "light"
+      ? {
+          // palette values for light mode
+          primary: amber,
+          divider: amber[200],
+          text: {
+            primary: grey[900],
+            secondary: grey[800],
+          },
+        }
+      : {
+          // palette values for dark mode
+          primary: grey,
+          divider: grey[900],
+          background: {
+            default: grey[900],
+            paper: grey[900],
+          },
+          text: {
             primary: "#fff",
-            secondary: grey[400],
-          }
-        : {
-            primary: "#fff",
-            secondary: grey.A700,
-          }),
-    },
+            secondary: grey[500],
+          },
+        }),
   },
 });
 

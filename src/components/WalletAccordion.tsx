@@ -14,7 +14,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import React from "react";
 import { green } from "@mui/material/colors";
-
+import "../App.css";
 const DECIMAL_OFFSET = 1000000000;
 
 export default function DetailedAccordion() {
@@ -43,7 +43,8 @@ export default function DetailedAccordion() {
       .then((balance) => {
         dispatch({ type: "getBalance", payload: balance / DECIMAL_OFFSET });
         toast.success("Successfully Connected!", {
-          position: "bottom-center",
+          className: "success-toast",
+          position: "top-right",
           autoClose: 7000,
           pauseOnHover: true,
         });
@@ -100,7 +101,7 @@ export default function DetailedAccordion() {
 
             <Typography
               style={{ fontFamily: "Quicksand", fontSize: 20 }}
-              color="green"
+              color={green.A400}
             >
               {state.balance} SOL
             </Typography>

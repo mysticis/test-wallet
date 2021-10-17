@@ -67,9 +67,11 @@ export default function Recieve() {
         onClose={handleClose}
         aria-labelledby="form-dialog-title"
       >
-        <DialogTitle id="form-dialog-title">Copy Address</DialogTitle>
+        <DialogTitle id="form-dialog-title" color={green.A400}>
+          Copy Address
+        </DialogTitle>
         <DialogContent>
-          <DialogContentText fontFamily={"Quicksand"}>
+          <DialogContentText fontFamily={"Quicksand"} color={green.A400}>
             Copy the highlighted address to recieve SOL tokens or click to scan
             barcode
           </DialogContentText>
@@ -77,6 +79,7 @@ export default function Recieve() {
             <TextField
               inputRef={(ref) => (textareaRef.current = ref)}
               autoFocus
+              color="success"
               value={state.pubKey}
               margin="normal"
               label="Recieving Address"
