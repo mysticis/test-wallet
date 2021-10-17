@@ -1,25 +1,25 @@
 {
   "files": {
     "main.css": "/test-wallet/static/css/main.6435b4f1.chunk.css",
-    "main.js": "/test-wallet/static/js/main.ea515783.chunk.js",
-    "main.js.map": "/test-wallet/static/js/main.ea515783.chunk.js.map",
+    "main.js": "/test-wallet/static/js/main.c09ee523.chunk.js",
+    "main.js.map": "/test-wallet/static/js/main.c09ee523.chunk.js.map",
     "runtime-main.js": "/test-wallet/static/js/runtime-main.e4c4ab64.js",
     "runtime-main.js.map": "/test-wallet/static/js/runtime-main.e4c4ab64.js.map",
     "static/css/2.58a45539.chunk.css": "/test-wallet/static/css/2.58a45539.chunk.css",
-    "static/js/2.eaef5b74.chunk.js": "/test-wallet/static/js/2.eaef5b74.chunk.js",
-    "static/js/2.eaef5b74.chunk.js.map": "/test-wallet/static/js/2.eaef5b74.chunk.js.map",
+    "static/js/2.d5472196.chunk.js": "/test-wallet/static/js/2.d5472196.chunk.js",
+    "static/js/2.d5472196.chunk.js.map": "/test-wallet/static/js/2.d5472196.chunk.js.map",
     "static/js/3.299dbbab.chunk.js": "/test-wallet/static/js/3.299dbbab.chunk.js",
     "static/js/3.299dbbab.chunk.js.map": "/test-wallet/static/js/3.299dbbab.chunk.js.map",
     "index.html": "/test-wallet/index.html",
     "static/css/2.58a45539.chunk.css.map": "/test-wallet/static/css/2.58a45539.chunk.css.map",
     "static/css/main.6435b4f1.chunk.css.map": "/test-wallet/static/css/main.6435b4f1.chunk.css.map",
-    "static/js/2.eaef5b74.chunk.js.LICENSE.txt": "/test-wallet/static/js/2.eaef5b74.chunk.js.LICENSE.txt"
+    "static/js/2.d5472196.chunk.js.LICENSE.txt": "/test-wallet/static/js/2.d5472196.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.e4c4ab64.js",
     "static/css/2.58a45539.chunk.css",
-    "static/js/2.eaef5b74.chunk.js",
+    "static/js/2.d5472196.chunk.js",
     "static/css/main.6435b4f1.chunk.css",
-    "static/js/main.ea515783.chunk.js"
+    "static/js/main.c09ee523.chunk.js"
   ]
 }
